@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GeocodingFacade
   def self.latitude_longitude(location)
     json_body = GeocodingService.location(location)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Forecast
   attr_reader :current_weather, :daily_weather, :hourly_weather
 

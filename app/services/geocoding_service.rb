@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class GeocodingService
   def self.conn
     Faraday.new(
       url: 'http://www.mapquestapi.com/geocoding/v1/',
       params: { key: Rails.application.credentials.mapquest[:api_key] },
-      headers: {'Content-Type' => 'application/json'}
+      headers: { 'Content-Type' => 'application/json' }
     )
   end
 

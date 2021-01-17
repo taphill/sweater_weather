@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe GeocodingService, type: :service do
   describe 'class methods' do
     describe '.location(location)', :vcr do
-      let(:json) { GeocodingService.location('denver,co') } 
+      let(:json) { GeocodingService.location('denver,co') }
 
       it { expect(json).to be_a(Hash) }
 

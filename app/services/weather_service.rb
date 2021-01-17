@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class WeatherService
-  def self.conn 
+  def self.conn
     Faraday.new(
       url: 'https://api.openweathermap.org/data/2.5/',
       params: { appid: Rails.application.credentials.openweathermap[:api_key] },
-      headers: {'Content-Type' => 'application/json'}
+      headers: { 'Content-Type' => 'application/json' }
     )
   end
 

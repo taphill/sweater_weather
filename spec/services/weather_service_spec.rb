@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe WeatherService, type: :service do
   describe 'class methods' do
     describe '.weather_data(latitude, longitude)', :vcr do
-      let(:json) { WeatherService.weather_data(latitude: 39.738453, longitude: -104.984853) } 
+      let(:json) { WeatherService.weather_data(latitude: 39.738453, longitude: -104.984853) }
 
       it { expect(json).to be_a(Hash) }
 
@@ -51,7 +53,7 @@ RSpec.describe WeatherService, type: :service do
 
       it { expect(json[:daily].first).to have_key(:dt) }
       it { expect(json[:daily].first[:dt]).to be_a(Integer) }
-      
+
       it { expect(json[:daily].first).to have_key(:sunrise) }
       it { expect(json[:daily].first[:sunrise]).to be_a(Integer) }
 
@@ -84,7 +86,7 @@ RSpec.describe WeatherService, type: :service do
 
       it { expect(json[:hourly].first).to have_key(:dt) }
       it { expect(json[:hourly].first[:dt]).to be_a(Integer) }
-      
+
       it { expect(json[:hourly].first).to have_key(:temp) }
       it { expect(json[:hourly].first[:temp]).to be_a(Float) }
 
@@ -93,7 +95,7 @@ RSpec.describe WeatherService, type: :service do
 
       it { expect(json[:hourly].first).to have_key(:wind_deg) }
       it { expect(json[:hourly].first[:wind_deg]).to be_a(Integer) }
-      
+
       it { expect(json[:hourly].first).to have_key(:weather) }
       it { expect(json[:hourly].first[:weather]).to be_a(Array) }
       it { expect(json[:hourly].first[:weather].first).to be_a(Hash) }

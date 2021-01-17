@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class CurrentWeather
   attr_reader :datetime, :sunrise, :sunset, :temperature, :feels_like, :humidity,
               :uvi, :visibility, :conditions, :icon
 
   def initialize(attr)
-    @datetime = Time.at(attr[:current][:dt])
-    @sunrise = Time.at(attr[:current][:sunrise])
-    @sunset = Time.at(attr[:current][:sunset])
+    @datetime = Time.zone.at(attr[:current][:dt]).to_s
+    @sunrise = Time.zone.at(attr[:current][:sunrise]).to_s
+    @sunset = Time.zone.at(attr[:current][:sunset]).to_s
     @temperature = attr[:current][:temp]
     @feels_like = attr[:current][:feels_like]
     @humidity = attr[:current][:humidity]
