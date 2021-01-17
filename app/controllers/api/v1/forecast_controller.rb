@@ -10,7 +10,7 @@ module Api
           forecast = WeatherFacade.forecast(latitude: geocode[:latitude], longitude: geocode[:longitude])
           render json: ForecastSerializer.new(forecast)
         else
-          render json: { message: 'Please ensure you entered a valid location' }, status: 404
+          render json: { message: 'Please ensure you entered a valid location' }, status: :not_found
         end
       end
 

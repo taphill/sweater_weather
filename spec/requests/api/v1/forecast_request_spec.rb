@@ -95,8 +95,8 @@ RSpec.describe 'Api/V1/Forecast request', type: :request do
     context 'when passed an invalid location' do
       it 'returns a 404', :vcr do
         get api_v1_forecast_index_path, params: { location: 'bklaksjdfowlkjasdfjlqk' }
-       
-        expect(response.status).to eq(404) 
+
+        expect(response.status).to eq(404)
         expect(json_body).to have_key(:message)
         expect(json_body[:message]).to eq('Please ensure you entered a valid location')
       end
