@@ -11,7 +11,7 @@ class ImageService
 
   def self.background_image_data(location)
     response = conn.get('/search/photos') do |req|
-      req.params['query'] = "#{location} city skyline"
+      req.params['query'] = location
       req.params['per_page'] = 1
     end
 
