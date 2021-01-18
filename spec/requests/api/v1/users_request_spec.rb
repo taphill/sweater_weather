@@ -29,5 +29,27 @@ RSpec.describe 'Api/V1/Users request', type: :request do
       it { expect(json_body[:data][:attributes]).to have_key(:api_key) }
       it { expect(json_body[:data][:attributes][:api_key]).to eq(User.all.first.api_key) }
     end
+
+    context 'when missing email' do
+      before { 
+        post api_v1_users_path,
+        params: { password: 'password', password_confirmation: 'password' }
+      }
+
+      it { expect(response.status).to eq(403) }
+      it { expect(json_body).to have_key(:message) }
+      it { expect(json_body[:message]).to eq("Validation failed: Email can't be blank") }
+    end
+
+    context 'when missing password' do
+      before { 
+        post api_v1_users_path,
+        params: { email: 'hi@example.com', password_confirmation: 'password' }
+      }
+
+      it { expect(response.status).to eq(403) }
+      it { expect(json_body).to have_key(:message) }
+      it { expect(json_body[:message]).to eq("Validation failed: Password can't be blank") }
+    end
   end
 end
