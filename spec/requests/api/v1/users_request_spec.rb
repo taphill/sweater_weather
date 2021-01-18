@@ -51,5 +51,40 @@ RSpec.describe 'Api/V1/Users request', type: :request do
       it { expect(json_body).to have_key(:message) }
       it { expect(json_body[:message]).to eq("Validation failed: Password can't be blank") }
     end
+
+    context 'when missing password confirmation' do
+      before { 
+        post api_v1_users_path,
+        params: { email: 'hi@example.com', password: 'password' }
+      }
+
+      it { expect(response.status).to eq(403) }
+      it { expect(json_body).to have_key(:message) }
+      it { expect(json_body[:message]).to eq("Validation failed: Password confirmation can't be blank") }
+    end
+
+    context 'when password does not match password confirmation' do
+      before { 
+        post api_v1_users_path,
+        params: { email: 'hi@example.com', password: 'password', password_confirmation: 'pass' }
+      }
+
+      it { expect(response.status).to eq(403) }
+      it { expect(json_body).to have_key(:message) }
+      it { expect(json_body[:message]).to eq("Validation failed: Password confirmation doesn't match Password") }
+    end
+
+    context 'when user email already exists' do
+      let!(:user) { create(:user, email: 'hi@example.com') }
+
+      before { 
+        post api_v1_users_path,
+        params: { email: 'hi@example.com', password: 'password', password_confirmation: 'password' }
+      }
+
+      it { expect(response.status).to eq(403) }
+      it { expect(json_body).to have_key(:message) }
+      it { expect(json_body[:message]).to eq("Validation failed: Email has already been taken") }
+    end
   end
 end
