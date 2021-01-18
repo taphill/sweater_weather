@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Api/V1/Sessions request', type: :request do
@@ -7,10 +9,10 @@ RSpec.describe 'Api/V1/Sessions request', type: :request do
     let(:json_body) { JSON.parse(response.body, symbolize_names: true) }
 
     context 'when valid' do
-      before { 
+      before do
         post api_v1_sessions_path,
-        params: { email: 'hi@example.com', password: 'password' }
-      }
+             params: { email: 'hi@example.com', password: 'password' }
+      end
 
       it { expect(response.status).to eq(200) }
 
@@ -31,10 +33,10 @@ RSpec.describe 'Api/V1/Sessions request', type: :request do
     end
 
     context 'when email does not exist' do
-      before { 
+      before do
         post api_v1_sessions_path,
-        params: { email: 'mikejones@example.com', password: 'password' }
-      }
+             params: { email: 'mikejones@example.com', password: 'password' }
+      end
 
       it { expect(response.status).to eq(403) }
       it { expect(json_body).to have_key(:message) }
@@ -42,10 +44,10 @@ RSpec.describe 'Api/V1/Sessions request', type: :request do
     end
 
     context 'when password does not match' do
-      before { 
+      before do
         post api_v1_sessions_path,
-        params: { email: 'hi@example.com', password: 'pass' }
-      }
+             params: { email: 'hi@example.com', password: 'pass' }
+      end
 
       it { expect(response.status).to eq(403) }
       it { expect(json_body).to have_key(:message) }

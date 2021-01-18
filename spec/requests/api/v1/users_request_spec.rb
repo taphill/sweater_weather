@@ -7,10 +7,10 @@ RSpec.describe 'Api/V1/Users request', type: :request do
     let(:json_body) { JSON.parse(response.body, symbolize_names: true) }
 
     context 'when valid' do
-      before { 
+      before do
         post api_v1_users_path,
-        params: { email: 'hi@example.com', password: 'password', password_confirmation: 'password' }
-      }
+             params: { email: 'hi@example.com', password: 'password', password_confirmation: 'password' }
+      end
 
       it { expect(response.status).to eq(201) }
 
@@ -31,10 +31,10 @@ RSpec.describe 'Api/V1/Users request', type: :request do
     end
 
     context 'when missing email' do
-      before { 
+      before do
         post api_v1_users_path,
-        params: { password: 'password', password_confirmation: 'password' }
-      }
+             params: { password: 'password', password_confirmation: 'password' }
+      end
 
       it { expect(response.status).to eq(403) }
       it { expect(json_body).to have_key(:message) }
@@ -42,10 +42,10 @@ RSpec.describe 'Api/V1/Users request', type: :request do
     end
 
     context 'when missing password' do
-      before { 
+      before do
         post api_v1_users_path,
-        params: { email: 'hi@example.com', password_confirmation: 'password' }
-      }
+             params: { email: 'hi@example.com', password_confirmation: 'password' }
+      end
 
       it { expect(response.status).to eq(403) }
       it { expect(json_body).to have_key(:message) }
@@ -53,10 +53,10 @@ RSpec.describe 'Api/V1/Users request', type: :request do
     end
 
     context 'when missing password confirmation' do
-      before { 
+      before do
         post api_v1_users_path,
-        params: { email: 'hi@example.com', password: 'password' }
-      }
+             params: { email: 'hi@example.com', password: 'password' }
+      end
 
       it { expect(response.status).to eq(403) }
       it { expect(json_body).to have_key(:message) }
@@ -64,10 +64,10 @@ RSpec.describe 'Api/V1/Users request', type: :request do
     end
 
     context 'when password does not match password confirmation' do
-      before { 
+      before do
         post api_v1_users_path,
-        params: { email: 'hi@example.com', password: 'password', password_confirmation: 'pass' }
-      }
+             params: { email: 'hi@example.com', password: 'password', password_confirmation: 'pass' }
+      end
 
       it { expect(response.status).to eq(403) }
       it { expect(json_body).to have_key(:message) }
@@ -77,14 +77,14 @@ RSpec.describe 'Api/V1/Users request', type: :request do
     context 'when user email already exists' do
       let!(:user) { create(:user, email: 'hi@example.com') }
 
-      before { 
+      before do
         post api_v1_users_path,
-        params: { email: 'hi@example.com', password: 'password', password_confirmation: 'password' }
-      }
+             params: { email: 'hi@example.com', password: 'password', password_confirmation: 'password' }
+      end
 
       it { expect(response.status).to eq(403) }
       it { expect(json_body).to have_key(:message) }
-      it { expect(json_body[:message]).to eq("Validation failed: Email has already been taken") }
+      it { expect(json_body[:message]).to eq('Validation failed: Email has already been taken') }
     end
   end
 end
