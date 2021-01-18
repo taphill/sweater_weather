@@ -84,4 +84,8 @@ VCR.configure do |config|
   config.configure_rspec_metadata!
   config.default_cassette_options = { re_record_interval: 30.days }
   config.filter_sensitive_data('<OPEN_WEATHER_MAP_API_KEY>') { Rails.application.credentials.openweathermap[:api_key] }
+  config.filter_sensitive_data('<MAPQUEST_API_KEY>') { Rails.application.credentials.mapquest[:api_key] }
+  config.filter_sensitive_data('<MAPQUEST_CONSUMER_SECRET>') { Rails.application.credentials.mapquest[:consumer_secret] }
+  config.filter_sensitive_data('<UNSPLASH_API_KEY>') { Rails.application.credentials.unsplash[:api_key] }
+  config.filter_sensitive_data('<UNSPLASH_SECRET_KEY>') { Rails.application.credentials.unsplash[:secret_key] }
 end
