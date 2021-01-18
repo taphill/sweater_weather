@@ -2,7 +2,7 @@
 
 class GeocodingFacade
   def self.latitude_longitude(location)
-    json_body = GeocodingService.location(location)
+    json_body = MapService.location(location)
 
     latitude = json_body[:results].first[:locations].first[:latLng][:lat]
     longitude = json_body[:results].first[:locations].first[:latLng][:lng]

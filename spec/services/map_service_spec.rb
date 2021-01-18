@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe GeocodingService, type: :service do
+RSpec.describe MapService, type: :service do
   describe 'class methods' do
     describe '.location(location)', :vcr do
-      let(:json) { GeocodingService.location('denver,co') }
+      let(:json) { MapService.location('denver,co') }
 
       it { expect(json).to be_a(Hash) }
 

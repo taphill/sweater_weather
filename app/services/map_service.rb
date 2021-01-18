@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GeocodingService
+class MapService
   def self.conn
     Faraday.new(
       url: 'http://www.mapquestapi.com/geocoding/v1/',
@@ -16,6 +16,9 @@ class GeocodingService
     end
 
     JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.route(origin:, destination:)
   end
 
   private_class_method :conn
