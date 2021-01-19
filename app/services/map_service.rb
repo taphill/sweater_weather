@@ -26,5 +26,14 @@ class MapService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def self.munchies_route(from:, to:)
+    response = conn.post('directions/v2/route') do |request|
+      request.params['from'] = from
+      request.params['to'] = to
+    end
+
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
   private_class_method :conn
 end
