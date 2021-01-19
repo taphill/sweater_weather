@@ -4,7 +4,7 @@ class MunchiesFacade
   def self.create_munchie(start:, end_location:, food:)
     route_data = MapService.munchies_route(from: start, to: end_location)
 
-require 'pry'; binding.pry
+    restaurant(location: end_location, term: food, open_at: (Time.now.getlocal + route_data[:route][:realTime]).to_i)
     # Munchie.new(
     #   destination: end_location,
     #   travel_time: seconds_to_hours(route_data[:route][:realTime]),
@@ -26,8 +26,11 @@ require 'pry'; binding.pry
   def self.restaurant(location:, term:, open_at:)
     data = RestaurantService.find(location: location, term: term, open_at: open_at)
 
-require 'pry'; binding.pry
+    {
+      name: data[:businesses].first[:name],
+      address: data[:businesses].first[:location][:display_address].join
+    }
   end
 
-  private_class_method :seconds_to_hours
+  private_class_method :seconds_to_hours, :restaurant
 end
