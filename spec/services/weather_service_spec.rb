@@ -32,7 +32,7 @@ RSpec.describe WeatherService, type: :service do
       it { expect(json[:current][:humidity]).to be_a(Integer) }
 
       it { expect(json[:current]).to have_key(:uvi) }
-      it { expect(json[:current][:uvi]).to be_a(Float) }
+      it { expect(json[:current][:uvi]).to be_a(Numeric) }
 
       it { expect(json[:current]).to have_key(:visibility) }
       it { expect(json[:current][:visibility]).to be_a(Integer) }

@@ -4,7 +4,7 @@ class HourlyWeather
   attr_reader :date, :temperature, :wind_speed, :wind_direction, :conditions, :icon
 
   def initialize(attr)
-    @time = Time.zone.at(attr[:dt]).strftime('%l:%M%p').delete(' ')
+    @time = Time.zone.at(attr[:dt]).getlocal.strftime('%l:%M%p').delete(' ')
     @temperature = attr[:temp]
     @wind_speed = "#{attr[:wind_speed].round} mph"
     @wind_direction = calculate_wind_direction(attr[:wind_deg])

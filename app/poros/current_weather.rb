@@ -5,9 +5,9 @@ class CurrentWeather
               :uvi, :visibility, :conditions, :icon
 
   def initialize(attr)
-    @datetime = Time.zone.at(attr[:current][:dt]).to_s
-    @sunrise = Time.zone.at(attr[:current][:sunrise]).to_s
-    @sunset = Time.zone.at(attr[:current][:sunset]).to_s
+    @datetime = Time.zone.at(attr[:current][:dt]).getlocal.to_s
+    @sunrise = Time.zone.at(attr[:current][:sunrise]).getlocal.to_s
+    @sunset = Time.zone.at(attr[:current][:sunset]).getlocal.to_s
     @temperature = attr[:current][:temp]
     @feels_like = attr[:current][:feels_like]
     @humidity = attr[:current][:humidity]
