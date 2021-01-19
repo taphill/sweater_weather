@@ -41,5 +41,16 @@ RSpec.describe MapService, type: :service do
       it { expect(json[:time].first).to eq(0) }
       it { expect(json[:time].last).to be_a(Integer) }
     end
+
+    describe '.munchies_route(from, to)', :vcr do
+      let(:json) { MapService.munchies_route(from: 'denver,co', to: 'pueblo,co') }
+
+      it { expect(json).to be_a(Hash) }
+
+      it { expect(json).to have_key(:route) }
+      it { expect(json[:route]).to be_a(Hash) }
+      it { expect(json[:route]).to have_key(:realTime) }
+      it { expect(json[:route][:realTime]).to be_a(Numeric) }
+    end
   end
 end
