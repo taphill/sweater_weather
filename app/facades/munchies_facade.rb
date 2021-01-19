@@ -3,14 +3,13 @@
 class MunchiesFacade
   def self.create_munchie(start:, end_location:, food:)
     route_data = MapService.munchies_route(from: start, to: end_location)
-
-    restaurant(location: end_location, term: food, open_at: (Time.now.getlocal + route_data[:route][:realTime]).to_i)
-    # Munchie.new(
-    #   destination: end_location,
-    #   travel_time: seconds_to_hours(route_data[:route][:realTime]),
-    #   forecast: 
-    #   restaurant:
-    # )
+    
+    Munchie.new(
+      destination: end_location,
+      travel_time: seconds_to_hours(route_data[:route][:realTime]),
+      forecast: current_forecast(end_location)
+      restaurant: restaurant(location: end_location, term: food, open_at: (Time.now.getlocal + route_data[:route][:realTime]).to_i)
+    )
   end
 
   def self.seconds_to_hours(seconds)
@@ -21,6 +20,13 @@ class MunchiesFacade
   end
 
   def self.current_forecast(location)
+    geocode = GeocodingFacade.latitude_longitude(location)
+    forecast = WeatherFacade.forecast(latitude: geocode[:latitude], longitude: geocode[:longitude])
+
+    {
+      summary: forecast.current_weather.conditions,
+      temperature: forecast.current_weather.temperature
+    }
   end
 
   def self.restaurant(location:, term:, open_at:)
@@ -32,5 +38,5 @@ class MunchiesFacade
     }
   end
 
-  private_class_method :seconds_to_hours, :restaurant
+  private_class_method :seconds_to_hours, :current_forecast, :restaurant
 end
