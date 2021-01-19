@@ -19,7 +19,7 @@ class MapService
   end
 
   def self.route(origin:, destination:)
-    response = conn.get('directions/v2/routematrix') do |request|
+    response = conn.post('directions/v2/routematrix') do |request|
       request.body = { locations: [origin, destination] }.to_json
     end
 

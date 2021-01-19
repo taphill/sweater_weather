@@ -43,7 +43,7 @@ RSpec.describe 'Api/V1/Forecast request', type: :request do
       expect(json_body[:data][:attributes][:current_weather]).to have_key(:humidity)
       expect(json_body[:data][:attributes][:current_weather][:humidity]).to be_a(Integer)
       expect(json_body[:data][:attributes][:current_weather]).to have_key(:uvi)
-      expect(json_body[:data][:attributes][:current_weather][:uvi]).to be_a(Float)
+      expect(json_body[:data][:attributes][:current_weather][:uvi]).to be_a(Numeric)
       expect(json_body[:data][:attributes][:current_weather]).to have_key(:visibility)
       expect(json_body[:data][:attributes][:current_weather][:visibility]).to be_a(Integer)
       expect(json_body[:data][:attributes][:current_weather]).to have_key(:conditions)
