@@ -41,5 +41,8 @@ RSpec.describe 'Api/V1/Munchies request', type: :request do
       expect(json_body[:data][:attributes][:restaurant]).to have_key(:address)
       expect(json_body[:data][:attributes][:restaurant][:address]).to be_a(String)
     end
+
+    it 'has sad path' do
+    end
   end
 end
