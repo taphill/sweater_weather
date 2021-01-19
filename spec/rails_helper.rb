@@ -88,4 +88,5 @@ VCR.configure do |config|
   config.filter_sensitive_data('<MAPQUEST_CONSUMER_SECRET>') { Rails.application.credentials.mapquest[:consumer_secret] }
   config.filter_sensitive_data('<UNSPLASH_API_KEY>') { Rails.application.credentials.unsplash[:api_key] }
   config.filter_sensitive_data('<UNSPLASH_SECRET_KEY>') { Rails.application.credentials.unsplash[:secret_key] }
+  config.allow_http_connections_when_no_cassette = true
 end

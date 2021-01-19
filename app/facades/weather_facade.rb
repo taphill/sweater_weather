@@ -11,6 +11,14 @@ class WeatherFacade
     )
   end
 
+  def self.max_hourly(latitude:, longitude:)
+    data = WeatherService.weather_data(latitude: latitude, longitude: longitude)
+
+    data[:hourly].map do |hour|
+      HourlyWeather.new(hour)
+    end
+  end
+
   def self.daily_weather(data)
     data[:daily][0..4].map do |day|
       DailyWeather.new(day)
