@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe MunchiesFacade, type: :facade do
   describe 'class methods' do
     describe '.create_munchie(start, end_location, food)' do
-      it 'returns a munchi object' do
+      it 'returns a munchie object', :vcr do
         munchie = MunchiesFacade.create_munchie(start: 'denver,co', end_location: 'pueblo,co', food: 'mexican')
 
         expect(munchie).to be_a(Image)
