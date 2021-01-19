@@ -7,7 +7,7 @@ class MunchiesFacade
     Munchie.new(
       destination: end_location,
       travel_time: seconds_to_hours(route_data[:route][:realTime]),
-      forecast: current_forecast(end_location)
+      forecast: current_forecast(end_location),
       restaurant: restaurant(location: end_location, term: food, open_at: (Time.now.getlocal + route_data[:route][:realTime]).to_i)
     )
   end
@@ -16,7 +16,7 @@ class MunchiesFacade
     hours = seconds / 3600.0
     minutes = (hours % 1) * 60
 
-    "#{hours.floor} hours, #{minutes.round} minutes"
+    "#{hours.floor} hour(s), #{minutes.round} minutes"
   end
 
   def self.current_forecast(location)
