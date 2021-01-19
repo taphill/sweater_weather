@@ -34,7 +34,7 @@ class MunchiesFacade
 
     {
       name: data[:businesses].first[:name],
-      address: data[:businesses].first[:location][:display_address].join
+      address: data[:businesses].first[:location][:display_address].join(', ')
     }
   end
 
