@@ -25,7 +25,7 @@ class MunchiesFacade
 
     {
       summary: forecast.current_weather.conditions,
-      temperature: forecast.current_weather.temperature
+      temperature: forecast.current_weather.temperature.to_s
     }
   end
 
