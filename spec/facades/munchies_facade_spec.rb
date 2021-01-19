@@ -6,7 +6,7 @@ RSpec.describe MunchiesFacade, type: :facade do
       it 'returns a munchie object', :vcr do
         munchie = MunchiesFacade.create_munchie(start: 'denver,co', end_location: 'pueblo,co', food: 'mexican')
 
-        expect(munchie).to be_a(Image)
+        expect(munchie).to be_a(Munchie)
         expect(munchie.destination_city).to be_a(String)
         expect(munchie.travel_time).to be_a(String)
         expect(munchie.forecast).to be_a(Hash)
