@@ -24,9 +24,9 @@ unsplash:
 
 To get your own api keys you can visit the following sites:
 
-[OpenWeather Map](https://openweathermap.org/api)
-[MapQuest](https://developer.mapquest.com/)
-[Unsplash](https://unsplash.com/developers)
+- [OpenWeather Map](https://openweathermap.org/api)
+- [MapQuest](https://developer.mapquest.com/)
+- [Unsplash](https://unsplash.com/developers)
 
 ## Endpoints
 
@@ -146,5 +146,107 @@ Default response
             }
         }
     }
+}
+```
+
+### User
+
+```
+Creates a new user.
+
+POST /api/v1/users
+Content-Type: application/json
+Accept: application/json
+
+
+Raw json body
+
+{
+  "email": "whatever@example.com",
+  "password": "password",
+  "password_confirmation": "password"
+}
+```
+
+```json
+Default response
+
+{
+  "data": {
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      "email": "whatever@example.com",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+  }
+}
+```
+
+### Login
+
+```
+Authenticates an existing user.
+
+POST /api/v1/sessions
+Content-Type: application/json
+Accept: application/json
+
+Raw json body
+
+{
+  "email": "whatever@example.com",
+  "password": "password"
+}
+```
+```json
+Default response
+
+{
+  "data": {
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      "email": "whatever@example.com",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+  }
+}
+```
+
+### Road Trip
+
+```
+Allows a user to plan road trips.
+
+POST /api/v1/road_trip
+Content-Type: application/json
+Accept: application/json
+
+Raw json body
+
+{
+  "origin": "Denver,CO",
+  "destination": "Pueblo,CO",
+  "api_key": "jgn983hy48thw9begh98h4539h4"
+}
+```
+```json
+Default response
+
+{
+  "data": {
+    "id": null,
+    "type": "roadtrip",
+    "attributes": {
+      "start_city": "Denver, CO",
+      "end_city": "Pueblo, CO",
+      "travel_time": "1 hour(s), 51 minutes"
+      "weather_at_eta": {
+        "temperature": 59.4,
+        "conditions": "partly cloudy"
+      }
+    }
+  }
 }
 ```
