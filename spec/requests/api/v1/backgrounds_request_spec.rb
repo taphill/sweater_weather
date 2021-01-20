@@ -34,5 +34,21 @@ RSpec.describe 'Api/V1/Backgrounds request', type: :request do
       expect(json_body[:data][:attributes][:image]).to have_key(:image_url)
       expect(json_body[:data][:attributes][:image][:image_url]).to be_a(String)
     end
+
+    it 'does not have uneeded attributes' do
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:total)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:total_pages)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:username)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:name)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:first_name)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:last_name)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:instagram_username)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:twitter_username)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:portfolio_url)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:profile_image)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:links)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:current_user_collections)
+      expect(json_body[:data][:attributes][:image]).not_to have_key(:urls)
+    end
   end
 end
