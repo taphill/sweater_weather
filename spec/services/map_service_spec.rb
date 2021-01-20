@@ -41,5 +41,16 @@ RSpec.describe MapService, type: :service do
       it { expect(json[:time].first).to eq(0) }
       it { expect(json[:time].last).to be_a(Integer) }
     end
+
+    describe 'invalid .route(origin, destination)', :vcr do
+      let(:json) { MapService.route(origin: 'Denver, CO', destination: 'London, UK') }
+
+      it { expect(json).to be_a(Hash) }
+
+      it { expect(json).to have_key(:route) }
+      it { expect(json[:route]).to be_a(Hash) }
+      it { expect(json[:route]).to have_key(:routeError) }
+      it { expect(json[:route][:routeError]).to be_a(Hash) }
+    end
   end
 end

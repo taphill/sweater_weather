@@ -17,9 +17,14 @@ module Api
       private
 
       def location_valid?(code)
+        return false if number?
         return false if code == 'A1XAX'
 
         true
+      end
+
+      def number?
+        params[:location].scan(/\D/).empty?
       end
     end
   end

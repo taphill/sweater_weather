@@ -130,12 +130,22 @@ RSpec.describe 'Api/V1/Forecast request', type: :request do
     end
   end
 
-  describe 'invalid GET /api/v1/forecast?location= request' do
+  describe 'invalid GET /api/v1/forecast?location= request', :vcr do
     let(:json_body) { JSON.parse(response.body, symbolize_names: true) }
 
     context 'when passed an invalid location' do
-      it 'returns a 404', :vcr do
+      it 'returns a 404' do
         get api_v1_forecast_index_path, params: { location: 'bklaksjdfowlkjasdfjlqk' }
+
+        expect(response.status).to eq(404)
+        expect(json_body).to have_key(:message)
+        expect(json_body[:message]).to eq('Please ensure you entered a valid location')
+      end
+    end
+
+    context 'when location is a number' do
+      it 'returns a 404' do
+        get api_v1_backgrounds_path, params: { location: '0090092834' }
 
         expect(response.status).to eq(404)
         expect(json_body).to have_key(:message)

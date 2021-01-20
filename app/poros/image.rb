@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Image
-  attr_reader :photographer, :profile, :image_location, :image_url
+  attr_reader :photographer, :profile, :hosting_site, :image_location, :image_url
 
   def initialize(attr:, location:)
     @photographer = attr[:results].first[:user][:name]

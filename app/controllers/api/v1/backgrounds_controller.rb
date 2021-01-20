@@ -4,9 +4,27 @@ module Api
   module V1
     class BackgroundsController < ApplicationController
       def index
-        image = ImageFacade.background_image(params[:location])
+        if location_valid?
+          image = ImageFacade.background_image(params[:location])
+          render json: ImageSerializer.new(image)
+        else
+          render json: { message: 'Please ensure you entered a valid location' }, status: :not_found
+        end
+      end
 
-        render json: ImageSerializer.new(image)
+      private
+
+      def location_valid?
+        return false if number?
+
+        geocode = GeocodingFacade.latitude_longitude(params[:location])
+        return false if geocode[:quality_code] == 'A1XAX'
+
+        true
+      end
+
+      def number?
+        params[:location].scan(/\D/).empty?
       end
     end
   end

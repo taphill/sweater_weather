@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HourlyWeather
-  attr_reader :date, :temperature, :wind_speed, :wind_direction, :conditions, :icon
+  attr_reader :time, :temperature, :wind_speed, :wind_direction, :conditions, :icon
 
   def initialize(attr)
     @time = Time.zone.at(attr[:dt]).getlocal.strftime('%l:%M%p').delete(' ')
