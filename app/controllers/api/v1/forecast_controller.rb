@@ -17,9 +17,14 @@ module Api
       private
 
       def location_valid?(code)
+        return false if is_number?
         return false if code == 'A1XAX'
 
         true
+      end
+
+      def is_number?
+        params[:location].to_i.to_s == params[:location]
       end
     end
   end
