@@ -20,11 +20,7 @@ module Api
 
         road_trip = RoadTripFacade.trip(origin: params[:origin], destination: params[:destination])
 
-        if road_trip.nil?
-          render json: { message: 'We are unable to route with the given locations.' }, status: :unprocessable_entity
-        else
-          render json: RoadTripSerializer.new(road_trip)
-        end
+        render json: RoadTripSerializer.new(road_trip)
       end
 
       def location_valid?
