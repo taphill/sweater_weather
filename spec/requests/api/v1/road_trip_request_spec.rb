@@ -55,9 +55,11 @@ RSpec.describe 'Api/V1/Road trip request', type: :request do
     end
 
     context 'when origin is invalid' do
+      let(:user) { create(:user) }
+
       before do
         post api_v1_road_trip_index_path,
-             params: { origin: 'lkajsdlkfjoalskjdf', destination: 'nashville,tn', api_key: 'osdua2Hsu2axr2hd' }
+             params: { origin: 'lkajsdlkfjoalskjdf', destination: 'nashville,tn', api_key: user.api_key }
       end
 
       it { expect(response.status).to eq(404) }
@@ -65,6 +67,21 @@ RSpec.describe 'Api/V1/Road trip request', type: :request do
       it { expect(json_body).to be_a(Hash) }
       it { expect(json_body).to have_key(:message) }
       it { expect(json_body[:message]).to eq("Please ensure you've entered valid locations") }
+    end
+
+    context 'when route is impossible' do
+      let(:user) { create(:user) }
+
+      before do
+        post api_v1_road_trip_index_path,
+             params: { origin: 'denver,co', destination: 'london,uk', api_key: user.api_key }
+      end
+
+      it { expect(response.status).to eq(422) }
+
+      it { expect(json_body).to be_a(Hash) }
+      it { expect(json_body).to have_key(:message) }
+      it { expect(json_body[:message]).to eq('We are unable to route with the given locations.') }
     end
   end
 end

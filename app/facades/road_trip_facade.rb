@@ -4,6 +4,8 @@ class RoadTripFacade
   def self.trip(origin:, destination:)
     data = MapService.route(origin: origin, destination: destination)
 
+    return nil unless data[:info][:messages].empty?
+
     travel_time = seconds_to_hours(data[:time].last)
 
     RoadTrip.new(

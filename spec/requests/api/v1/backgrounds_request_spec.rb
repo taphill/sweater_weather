@@ -65,7 +65,7 @@ RSpec.describe 'Api/V1/Backgrounds request', type: :request do
 
     context 'when location is a number' do
       it 'returns a 404' do
-        get api_v1_backgrounds_path, params: { location: 90092834 }
+        get api_v1_backgrounds_path, params: { location: 90_092_834 }
 
         expect(response.status).to eq(404)
         expect(json_body).to have_key(:message)

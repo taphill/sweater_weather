@@ -15,7 +15,7 @@ module Api
       private
 
       def location_valid?
-        return false if is_number?
+        return false if number?
 
         geocode = GeocodingFacade.latitude_longitude(params[:location])
         return false if geocode[:quality_code] == 'A1XAX'
@@ -23,7 +23,7 @@ module Api
         true
       end
 
-      def is_number?
+      def number?
         params[:location].to_i.to_s == params[:location]
       end
     end

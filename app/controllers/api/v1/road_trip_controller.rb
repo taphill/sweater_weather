@@ -11,7 +11,11 @@ module Api
         if User.find_by(api_key: params[:api_key])
           road_trip = RoadTripFacade.trip(origin: params[:origin], destination: params[:destination])
 
-          render json: RoadTripSerializer.new(road_trip)
+          if road_trip.nil?
+            render json: { message: 'We are unable to route with the given locations.' }, status: :unprocessable_entity
+          else
+            render json: RoadTripSerializer.new(road_trip)
+          end
         else
           render json: { message: 'Unauthorized request' }, status: :unauthorized
         end
@@ -20,7 +24,7 @@ module Api
       private
 
       def location_valid?
-        return false if is_number?
+        return false if number?
 
         geocode_origin = GeocodingFacade.latitude_longitude(params[:origin])
         return false if geocode_origin[:quality_code] == 'A1XAX'
@@ -31,7 +35,7 @@ module Api
         true
       end
 
-      def is_number?
+      def number?
         params[:origin].to_i.to_s == params[:origin] || params[:destination].to_i.to_s == params[:destination]
       end
     end
