@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Forecast, type: :poro do
@@ -8,7 +10,9 @@ RSpec.describe Forecast, type: :poro do
     let(:daily_weather) { DailyWeather.new(data[:daily].first) }
     let(:hourly_weather) { HourlyWeather.new(data[:hourly].first) }
 
-    let(:forecast) { Forecast.new(current_weather: current_weather, daily_weather: daily_weather, hourly_weather: hourly_weather) }
+    let(:forecast) do
+      Forecast.new(current_weather: current_weather, daily_weather: daily_weather, hourly_weather: hourly_weather)
+    end
 
     it { expect(forecast).to be_a(Forecast) }
 

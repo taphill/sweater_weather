@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RoadTrip, type: :poro do
   describe 'attributes' do
-    let(:road_trip){ RoadTrip.new(
-      start_city: 'denver,co',
-      end_city: 'pueblo,co',
-      travel_time: '1 hour(s) 51 minutes',
-      weather_at_eta: { temperature: '65', conditions: 'Cloudy' }
-    )}
+    let(:road_trip) do
+      RoadTrip.new(
+        start_city: 'denver,co',
+        end_city: 'pueblo,co',
+        travel_time: '1 hour(s) 51 minutes',
+        weather_at_eta: { temperature: '65', conditions: 'Cloudy' }
+      )
+    end
 
     it { expect(road_trip).to be_a(RoadTrip) }
 
