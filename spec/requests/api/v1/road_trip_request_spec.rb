@@ -53,5 +53,18 @@ RSpec.describe 'Api/V1/Road trip request', type: :request do
       it { expect(json_body).to have_key(:message) }
       it { expect(json_body[:message]).to eq('Unauthorized request') }
     end
+
+    context 'when origin is invalid' do
+      before do
+        post api_v1_road_trip_index_path,
+             params: { origin: 'lkajsdlkfjoalskjdf', destination: 'nashville,tn', api_key: 'osdua2Hsu2axr2hd' }
+      end
+
+      it { expect(response.status).to eq(404) }
+
+      it { expect(json_body).to be_a(Hash) }
+      it { expect(json_body).to have_key(:message) }
+      it { expect(json_body[:message]).to eq("Please ensure you've entered valid locations") }
+    end
   end
 end
