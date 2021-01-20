@@ -257,7 +257,7 @@ Default response
     "attributes": {
       "start_city": "Denver, CO",
       "end_city": "Pueblo, CO",
-      "travel_time": "1 hour(s), 51 minutes"
+      "travel_time": "1 hour(s), 51 minutes",
       "weather_at_eta": {
         "temperature": 59.4,
         "conditions": "partly cloudy"
