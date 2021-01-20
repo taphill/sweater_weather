@@ -24,7 +24,7 @@ module Api
       end
 
       def number?
-        params[:location].to_i.to_s == params[:location]
+        params[:location].scan(/\D/).empty?
       end
     end
   end

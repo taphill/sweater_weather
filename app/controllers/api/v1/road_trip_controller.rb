@@ -40,7 +40,7 @@ module Api
       end
 
       def number?
-        params[:origin].to_i.to_s == params[:origin] || params[:destination].to_i.to_s == params[:destination]
+        params[:origin].scan(/\D/).empty? || params[:destination].scan(/\D/).empty?
       end
     end
   end
