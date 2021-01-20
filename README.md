@@ -1,5 +1,15 @@
 # Sweater Weather
 
+Sweater weather is an application that mimics a working in a service-oriented architecture.
+
+## Learning Goals
+
+- Expose an API that aggregates data from multiple external APIs
+- Expose an API that requires an authentication token
+- Expose an API for CRUD functionality
+- Determine completion criteria based on the needs of other developers
+- Research, select, and consume an API based on your needs as a developer
+
 ## Getting Started
 
 To get started, clone this repo and run the following commands:
