@@ -29,6 +29,16 @@ RSpec.describe RoadTripFacade, type: :facade do
         expect(road_trip.travel_time).to eq('impossible route')
         expect(road_trip.weather_at_eta).to be_nil
       end
+
+      it 'returns a road trip object when route is too long for weather eta' do
+        road_trip = RoadTripFacade.trip(origin: 'new york city,ny', destination: 'fairbanks,ak')
+
+        expect(road_trip).to be_a(RoadTrip)
+        expect(road_trip.start_city).to be_a(String)
+        expect(road_trip.end_city).to be_a(String)
+        expect(road_trip.travel_time).to be_a(String)
+        expect(road_trip.weather_at_eta).to be_nil
+      end
     end
   end
 end

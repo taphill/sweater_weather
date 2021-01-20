@@ -143,5 +143,35 @@ RSpec.describe 'Api/V1/Road trip request', type: :request do
       it { expect(json_body[:data][:attributes]).to have_key(:weather_at_eta) }
       it { expect(json_body[:data][:attributes][:weather_at_eta]).to be_nil }
     end
+
+    context 'when route is too long for weather eta' do
+      let(:user) { create(:user) }
+
+      before do
+        post api_v1_road_trip_index_path,
+             params: { origin: 'new york city,ny', destination: 'fairbanks,ak', api_key: user.api_key }
+      end
+
+      it { expect(response.status).to eq(200) }
+
+      it { expect(json_body).to be_a(Hash) }
+      it { expect(json_body).to have_key(:data) }
+      it { expect(json_body[:data]).to be_a(Hash) }
+      it { expect(json_body[:data]).to have_key(:id) }
+      it { expect(json_body[:data][:id]).to be_nil }
+      it { expect(json_body[:data]).to have_key(:type) }
+      it { expect(json_body[:data][:type]).to eq('roadtrip') }
+      it { expect(json_body[:data]).to have_key(:attributes) }
+      it { expect(json_body[:data][:attributes]).to be_a(Hash) }
+
+      it { expect(json_body[:data][:attributes]).to have_key(:start_city) }
+      it { expect(json_body[:data][:attributes][:start_city]).to be_a(String) }
+      it { expect(json_body[:data][:attributes]).to have_key(:end_city) }
+      it { expect(json_body[:data][:attributes][:end_city]).to be_a(String) }
+      it { expect(json_body[:data][:attributes]).to have_key(:travel_time) }
+      it { expect(json_body[:data][:attributes][:travel_time]).to be_a(String) }
+      it { expect(json_body[:data][:attributes]).to have_key(:weather_at_eta) }
+      it { expect(json_body[:data][:attributes][:weather_at_eta]).to be_nil }
+    end
   end
 end
