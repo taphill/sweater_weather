@@ -1,6 +1,6 @@
 # Sweater Weather
 
-Sweater weather is an application that mimics a working in a service-oriented architecture. This APIs job is to expose data that satisfies the front-end team’s requirements.
+Sweater weather is an application that mimics working in a service-oriented architecture. This APIs job is to expose data that satisfies the front-end team’s requirements.
 
 ## Table of Contents
 
